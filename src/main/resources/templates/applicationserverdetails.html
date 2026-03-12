@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>App Server Details</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Theme Update: Black and White */
+        :root { --primary: #000000; --accent: #333333; }
+        body { background: #f0f2f5; font-family: 'Segoe UI', sans-serif; min-height: 100vh; }
+        
+        /* Navbar matching mainfile - Right aligned */
+        .navbar { background: #000 !important; padding: 0.8rem; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+        
+        .sidebar-left { background: rgba(255, 255, 255, 0.9); border-right: 1px solid #cbd5e1; height: 100vh; position: fixed; width: 250px; padding: 25px; top: 72px; }
+        .main-content { margin-left: 250px; padding: 30px; padding-bottom: 100px; }
+        
+        /* Section Box Styles */
+        .section-box { background: #fff; border: 2px solid #000; border-radius: 12px; padding: 20px; margin-bottom: 40px; position: relative; }
+        .section-label { position: absolute; top: -15px; left: 20px; background: #000; color: white; padding: 2px 15px; border-radius: 5px; font-weight: bold; }
+        
+        .table-custom { font-size: 0.82rem; }
+        
+        /* Removing Blue Glow */
+        .table-custom input, .table-custom select, .table-custom textarea { 
+            border-radius: 6px; 
+            border: 1px solid #cbd5e1; 
+            padding: 5px; 
+            width: 100%; 
+            box-shadow: none !important;
+        }
+        
+        .table-custom input:focus, .table-custom select:focus, .table-custom textarea:focus {
+            border-color: #000 !important;
+            outline: none !important;
+            box-shadow: none !important;
+            background-color: #fff;
+        }
+
+        /* Buttons matching theme */
+        .btn-add { background-color: #000; color: white; border: none; padding: 6px 15px; border-radius: 6px; font-weight: 600; margin-right: 10px; }
+        .btn-delete { background-color: #dc3545; color: white; border: none; padding: 6px 15px; border-radius: 6px; font-weight: 600; }
+        
+        .btn-save-final { 
+            background: #000; 
+            color: white; 
+            padding: 14px 50px; 
+            border-radius: 12px; 
+            font-weight: 700; 
+            border: none; 
+            position: fixed; 
+            bottom: 20px; 
+            right: 40px; 
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3); 
+            text-transform: uppercase;
+        }
+        .btn-save-final:hover { background: #333; color: white; }
+        .fw-bold.text-success { color: #000 !important; }
+    </style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+    <div class="container-fluid">
+        <a class="navbar-brand fw-bold" href="#">App Dictionary</a>
+        <div class="navbar-nav ms-auto">
+            <a class="nav-link text-light opacity-50" th:href="@{/mainfile}">Main Details</a>
+            <a class="nav-link active fw-bold" th:href="@{/applicationserverdetails}">App Server Details</a>
+            <a class="nav-link text-light opacity-50" th:href="@{/clouddetails}">Cloud Details</a>
+            <a class="nav-link text-light opacity-50" th:href="@{/databaseserverdetails}">DB Server Details</a>
+        </div>
+    </div>
+</nav>
+
+<div class="sidebar-left">
+    <h6 class="fw-bold mb-4">App hosted Details</h6>
+    <div class="form-check mb-3"><input class="form-check-input" type="checkbox" checked><label class="form-check-label fw-bold">Smart AWS</label></div>
+    <div class="form-check mb-3"><input class="form-check-input" type="checkbox" checked><label class="form-check-label fw-bold">AVS</label></div>
+    <div class="form-check mb-3"><input class="form-check-input" type="checkbox"><label class="form-check-label fw-bold">Non AVS</label></div>
+    <div class="form-check mb-3"><input class="form-check-input" type="checkbox"><label class="form-check-label fw-bold">AVS / Smart AWS</label></div>
+    <div class="form-check mb-3"><input class="form-check-input" type="checkbox"><label class="form-check-label fw-bold">AWS</label></div>
+</div>
+
+<div class="main-content">
+    <div class="section-box" id="dev-section">
+        <div class="section-label">Dev CI</div>
+        <table class="table table-bordered table-custom mt-3">
+            <thead class="table-light">
+                <tr><th width="40px">Sel</th><th>Server Name</th><th>server os & version</th><th>deployed Server</th><th>Domain</th><th>Cluster</th><th>Service name</th><th>Ip Address</th></tr>
+            </thead>
+            <tbody class="row-container">
+                <tr><td><input type="checkbox" class="row-check"></td><td><input type="text" class="server-input" placeholder="Server 1"></td><td><input type="text"></td><td><select class="deployed-server"><option>Tomcat</option><option>Weblogic</option></select></td><td><input type="text"></td><td><input type="text"></td><td><textarea rows="1"></textarea></td><td><input type="text"></td></tr>
+            </tbody>
+        </table>
+        <button type="button" class="btn-add" onclick="addRow('dev-section')">Add Row</button>
+        <button type="button" class="btn-delete" onclick="deleteRow('dev-section')">Delete Row</button>
+    </div>
+
+    <div class="section-box" id="test-section">
+        <div class="section-label">Test CI</div>
+        <table class="table table-bordered table-custom mt-3">
+            <thead class="table-light"><tr><th width="40px">Sel</th><th>Server Name</th><th>server os & version</th><th>deployed Server</th><th>Domain</th><th>Cluster</th><th>Service name</th><th>Ip Address</th></tr></thead>
+            <tbody class="row-container">
+                <tr><td><input type="checkbox" class="row-check"></td><td><input type="text" class="server-input" placeholder="Server 1"></td><td><input type="text"></td><td><select class="deployed-server"><option>Tomcat</option><option>Weblogic</option></select></td><td><input type="text"></td><td><input type="text"></td><td><textarea rows="1"></textarea></td><td><input type="text"></td></tr>
+            </tbody>
+        </table>
+        <button type="button" class="btn-add" onclick="addRow('test-section')">Add Row</button>
+        <button type="button" class="btn-delete" onclick="deleteRow('test-section')">Delete Row</button>
+    </div>
+
+    <div class="section-box" id="qa-section">
+        <div class="section-label">QA CI</div>
+        <table class="table table-bordered table-custom mt-3">
+            <thead class="table-light"><tr><th width="40px">Sel</th><th>Server Name</th><th>server os & version</th><th>deployed Server</th><th>Domain</th><th>Cluster</th><th>Service name</th><th>Ip Address</th></tr></thead>
+            <tbody class="row-container">
+                <tr><td><input type="checkbox" class="row-check"></td><td><input type="text" class="server-input" placeholder="Server 1"></td><td><input type="text"></td><td><select class="deployed-server"><option>Tomcat</option><option>Weblogic</option></select></td><td><input type="text"></td><td><input type="text"></td><td><textarea rows="1"></textarea></td><td><input type="text"></td></tr>
+            </tbody>
+        </table>
+        <button type="button" class="btn-add" onclick="addRow('qa-section')">Add Row</button>
+        <button type="button" class="btn-delete" onclick="deleteRow('qa-section')">Delete Row</button>
+    </div>
+
+    <div class="section-box" id="prod-section">
+        <div class="section-label">prod CI</div>
+        <table class="table table-bordered table-custom mt-3">
+            <thead class="table-light"><tr><th width="40px">Sel</th><th>Server Name</th><th>server os & version</th><th>deployed Server</th><th>Domain</th><th>Cluster</th><th>Service name</th><th>Ip Address</th></tr></thead>
+            <tbody class="row-container">
+                <tr><td><input type="checkbox" class="row-check"></td><td><input type="text" class="server-input" placeholder="Server 1"></td><td><input type="text"></td><td><select class="deployed-server"><option>Tomcat</option><option>Weblogic</option></select></td><td><input type="text"></td><td><input type="text"></td><td><textarea rows="1"></textarea></td><td><input type="text"></td></tr>
+            </tbody>
+        </table>
+        <button type="button" class="btn-add" onclick="addRow('prod-section')">Add Row</button>
+        <button type="button" class="btn-delete" onclick="deleteRow('prod-section')">Delete Row</button>
+    </div>
+
+    <a th:href="@{/clouddetails}" class="btn-save-final text-decoration-none d-flex align-items-center justify-content-center">Save & Continue</a>
+</div>
+
+<script>
+    // Logic to reload added rows from browser storage
+    window.onload = function() {
+        const sections = ['dev-section', 'test-section', 'qa-section', 'prod-section'];
+        sections.forEach(id => {
+            const savedCount = localStorage.getItem('app-' + id + '-rowCount');
+            if (savedCount) {
+                for (let i = 1; i < parseInt(savedCount); i++) {
+                    createRow(id);
+                }
+            }
+        });
+    };
+
+    function addRow(id) {
+        createRow(id);
+        updateStorage(id);
+    }
+
+    function createRow(id) {
+        let tbody = document.querySelector(`#${id} .row-container`);
+        let newRow = tbody.rows[0].cloneNode(true);
+        newRow.querySelectorAll('input, textarea').forEach(i => {
+            if(i.type !== 'checkbox') i.value = '';
+            else i.checked = false;
+        });
+        let count = tbody.rows.length + 1;
+        newRow.querySelector('.server-input').placeholder = 'Server ' + count;
+        tbody.appendChild(newRow);
+    }
+
+    function deleteRow(id) {
+        let tbody = document.querySelector(`#${id} .row-container`);
+        let checks = [...tbody.querySelectorAll('.row-check')].filter(c => c.checked);
+        if (checks.length === 0 || tbody.rows.length <= 1) return;
+        checks.forEach(c => c.closest('tr').remove());
+        
+        // Re-index placeholders
+        tbody.querySelectorAll('.server-input').forEach((inp, i) => inp.placeholder = 'Server ' + (i + 1));
+        updateStorage(id);
+    }
+
+    function updateStorage(id) {
+        const tbody = document.querySelector(`#${id} .row-container`);
+        localStorage.setItem('app-' + id + '-rowCount', tbody.rows.length);
+    }
+</script>
+</body>
+</html>

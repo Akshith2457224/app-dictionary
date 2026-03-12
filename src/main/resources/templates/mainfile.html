@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>App Dictionary</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body { background: #f0f2f5; font-family: 'Segoe UI', sans-serif; min-height: 100vh; padding-bottom: 50px; }
+        .navbar { background: #000 !important; padding: 0.8rem; }
+        .form-container { background: #fff; border-radius: 12px; box-shadow: 0 2px 15px rgba(0,0,0,0.1); padding: 40px; margin: 30px auto; width: 95%; }
+        
+        /* Section Styling */
+        .section-box { border: 1px solid #e0e0e0; border-radius: 15px; padding: 25px; margin-bottom: 30px; background: #fafafa; }
+        .section-header { background: #fff; border: 1px solid #ddd; padding: 5px 20px; border-radius: 50px; display: inline-block; position: relative; top: -40px; font-weight: bold; color: #333; }
+
+        /* Side-by-Side Layout */
+        .form-group-custom { display: flex; align-items: center; margin-bottom: 12px; }
+        .field-label { width: 40%; font-weight: 500; color: #444; font-size: 0.85rem; text-align: right; padding-right: 15px; line-height: 1.2; }
+        .field-input { width: 60%; }
+
+        /* Custom Input Styling - Removing Blue Glow */
+        .form-control, .form-select { 
+            background-color: #e9ecef; 
+            border: 1px solid #d1d5db; 
+            border-radius: 8px; 
+            padding: 6px 12px; 
+            font-size: 0.85rem; 
+            box-shadow: none !important; /* Removes blue outline */
+        }
+        
+        /* Apply Black Border on Focus for all inputs and dropdowns */
+        .form-control:focus, .form-select:focus { 
+            background-color: #fff; 
+            border-color: #000 !important; 
+            box-shadow: none !important; 
+            outline: none !important;
+        }
+        
+        .btn-save { background: #000; color: white; padding: 12px 80px; border-radius: 8px; font-weight: bold; border: none; text-transform: uppercase; }
+        .btn-save:hover { background: #333; color: white; }
+    </style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand fw-bold" href="#">App Dictionary</a>
+        <div class="navbar-nav ms-auto">
+            <a class="nav-link active" th:href="@{/mainfile}">Main Details</a>
+            <a class="nav-link" th:href="@{/applicationserverdetails}">App Server Details</a>
+            <a class="nav-link" th:href="@{/clouddetails}">Cloud Details</a>
+            <a class="nav-link" th:href="@{/databaseserverdetails}">DB Server Details</a>
+        </div>
+    </div>
+</nav>
+
+<div class="container-fluid">
+    <div class="form-container">
+        <form>
+            <div class="section-box">
+                <div class="section-header">Basic Identity</div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group-custom"><label class="field-label">Beat ID</label><div class="field-input"><input type="text" class="form-control"></div></div>
+                        <div class="form-group-custom"><label class="field-label">Appliction Name</label><div class="field-input"><input type="text" class="form-control"></div></div>
+                        <div class="form-group-custom"><label class="field-label">GxP</label><div class="field-input"><select class="form-select"><option>select</option><option>Yes</option><option>No</option></select></div></div>
+                        <div class="form-group-custom"><label class="field-label">Squad</label><div class="field-input"><select class="form-select"><option>select</option><option>PF</option><option>CX</option><option>AEGS</option></select></div></div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group-custom"><label class="field-label">Sub Domain</label><div class="field-input"><select class="form-select"><option>select</option><option>Global</option><option>Local</option><option>Latam</option></select></div></div>
+                        <div class="form-group-custom"><label class="field-label">App Region</label><div class="field-input"><select class="form-select"><option>select</option><option>Emea</option><option>Apac</option><option>US</option><option>Canada</option></select></div></div>
+                        <div class="form-group-custom"><label class="field-label">Service variant</label><div class="field-input"><select class="form-select"><option>select</option><option>Gold+</option><option>Gold</option><option>Bronze</option></select></div></div>
+                        <div class="form-group-custom"><label class="field-label">Type Category</label><div class="field-input"><select class="form-select"><option>select</option><option>Type 1</option><option>Type 2</option><option>Type 3</option></select></div></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section-box">
+                <div class="section-header">Description & Impact</div>
+                <div class="row">
+                    <div class="col-md-12 mb-3">
+                        <div class="form-group-custom" style="align-items: flex-start;">
+                            <label class="field-label" style="width: 19.5%;">Application Decription</label>
+                            <div class="field-input" style="width: 80.5%;"><textarea class="form-control"></textarea></div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group-custom"><label class="field-label">Business impact description</label><div class="field-input"><textarea class="form-control"></textarea></div></div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group-custom"><label class="field-label">financial Impact ($/€)</label><div class="field-input"><input type="text" class="form-control"></div></div>
+                        <div class="form-group-custom"><label class="field-label">User Access Review</label><div class="field-input"><select class="form-select"><option>select</option><option>Monthly</option><option>Quaterly</option><option>Half Yearly</option><option>Yearly</option></select></div></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section-box">
+                <div class="section-header">Authentication & Vendor</div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group-custom"><label class="field-label">Authentication Type</label><div class="field-input"><select class="form-select"><option>select</option><option>Internal ocelot</option><option>External ocelot</option><option>Ldap</option><option>BAM</option></select></div></div>
+                        <div class="form-group-custom"><label class="field-label">Auth Details/Routing</label><div class="field-input"><textarea class="form-control"></textarea></div></div>
+                        <div class="form-group-custom"><label class="field-label">Autherization Type</label><div class="field-input"><select class="form-select"><option>select</option><option>User roles</option><option>Entitlements</option><option>AD Groups</option></select></div></div>
+                        <div class="form-group-custom"><label class="field-label">Vendor App</label><div class="field-input"><select class="form-select"><option>select</option><option>Yes</option><option>No</option></select></div></div>
+                        <div class="form-group-custom"><label class="field-label">Vendor Name</label><div class="field-input"><input type="text" class="form-control"></div></div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group-custom"><label class="field-label">App Decommissioned</label><div class="field-input"><select class="form-select"><option>select</option><option>Yes</option><option>No</option></select></div></div>
+                        <div class="form-group-custom"><label class="field-label">Vendor Ticketing URL</label><div class="field-input"><input type="text" class="form-control"></div></div>
+                        <div class="form-group-custom"><label class="field-label">Vendor Support Exist</label><div class="field-input"><select class="form-select"><option>select</option><option>Yes</option><option>No</option></select></div></div>
+                        <div class="form-group-custom"><label class="field-label">Vendor contact details</label><div class="field-input"><input type="text" class="form-control"></div></div>
+                        <div class="form-group-custom"><label class="field-label">App hosted in</label><div class="field-input"><select class="form-select"><option>select</option><option>Cloud</option><option>AWS</option><option>Azure</option><option>On Prem</option></select></div></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="d-flex justify-content-center mt-4">
+                <a th:href="@{/applicationserverdetails}" class="btn-save text-decoration-none">Save & Continue</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>
