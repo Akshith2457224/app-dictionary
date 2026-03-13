@@ -18,17 +18,9 @@
         .field-label { width: 40%; font-weight: 500; color: #444; font-size: 0.85rem; text-align: right; padding-right: 15px; line-height: 1.2; }
         .field-input { width: 60%; }
 
-        /* Custom Input Styling - Removing Blue Glow */
-        .form-control, .form-select { 
-            background-color: #e9ecef; 
-            border: 1px solid #d1d5db; 
-            border-radius: 8px; 
-            padding: 6px 12px; 
-            font-size: 0.85rem; 
-            box-shadow: none !important; /* Removes blue outline */
-        }
+        .form-control, .form-select { background-color: #e9ecef; border: 1px solid #d1d5db; border-radius: 8px; padding: 6px 12px; font-size: 0.85rem; }
         
-        /* Apply Black Border on Focus for all inputs and dropdowns */
+        /* REMOVE BLUE BORDER/GLOW ON FOCUS */
         .form-control:focus, .form-select:focus { 
             background-color: #fff; 
             border-color: #000 !important; 
@@ -37,7 +29,7 @@
         }
         
         .btn-save { background: #000; color: white; padding: 12px 80px; border-radius: 8px; font-weight: bold; border: none; text-transform: uppercase; }
-        .btn-save:hover { background: #333; color: white; }
+        textarea.form-control { min-height: 60px; }
     </style>
 </head>
 <body>
@@ -68,7 +60,7 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group-custom"><label class="field-label">Sub Domain</label><div class="field-input"><select class="form-select"><option>select</option><option>Global</option><option>Local</option><option>Latam</option></select></div></div>
-                        <div class="form-group-custom"><label class="field-label">App Region</label><div class="field-input"><select class="form-select"><option>select</option><option>Emea</option><option>Apac</option><option>US</option><option>Canada</option></select></div></div>
+                        <div class="col-md-12"><div class="form-group-custom"><label class="field-label">App Region</label><div class="field-input"><select class="form-select"><option>select</option><option>Emea</option><option>Apac</option><option>US</option><option>Canada</option></select></div></div></div>
                         <div class="form-group-custom"><label class="field-label">Service variant</label><div class="field-input"><select class="form-select"><option>select</option><option>Gold+</option><option>Gold</option><option>Bronze</option></select></div></div>
                         <div class="form-group-custom"><label class="field-label">Type Category</label><div class="field-input"><select class="form-select"><option>select</option><option>Type 1</option><option>Type 2</option><option>Type 3</option></select></div></div>
                     </div>
@@ -78,12 +70,7 @@
             <div class="section-box">
                 <div class="section-header">Description & Impact</div>
                 <div class="row">
-                    <div class="col-md-12 mb-3">
-                        <div class="form-group-custom" style="align-items: flex-start;">
-                            <label class="field-label" style="width: 19.5%;">Application Decription</label>
-                            <div class="field-input" style="width: 80.5%;"><textarea class="form-control"></textarea></div>
-                        </div>
-                    </div>
+                    <div class="col-md-12 mb-3"><div class="form-group-custom" style="align-items: flex-start;"><label class="field-label" style="width: 19.5%;">Application Decription</label><div class="field-input" style="width: 80.5%;"><textarea class="form-control"></textarea></div></div></div>
                     <div class="col-md-6">
                         <div class="form-group-custom"><label class="field-label">Business impact description</label><div class="field-input"><textarea class="form-control"></textarea></div></div>
                     </div>
@@ -110,6 +97,40 @@
                         <div class="form-group-custom"><label class="field-label">Vendor Support Exist</label><div class="field-input"><select class="form-select"><option>select</option><option>Yes</option><option>No</option></select></div></div>
                         <div class="form-group-custom"><label class="field-label">Vendor contact details</label><div class="field-input"><input type="text" class="form-control"></div></div>
                         <div class="form-group-custom"><label class="field-label">App hosted in</label><div class="field-input"><select class="form-select"><option>select</option><option>Cloud</option><option>AWS</option><option>Azure</option><option>On Prem</option></select></div></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section-box">
+                <div class="section-header">Technical Details</div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group-custom"><label class="field-label">App urls - Dev/test</label><div class="field-input"><textarea class="form-control"></textarea></div></div>
+                        <div class="form-group-custom"><label class="field-label">Github Repos</label><div class="field-input"><input type="text" class="form-control"></div></div>
+                        <div class="form-group-custom"><label class="field-label">LB /Vip Details</label><div class="field-input"><input type="text" class="form-control"></div></div>
+                        <div class="form-group-custom"><label class="field-label">External/Internal</label><div class="field-input"><select class="form-select"><option>select</option><option>External</option><option>Internal</option></select></div></div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group-custom"><label class="field-label">Upstream System</label><div class="field-input"><textarea class="form-control"></textarea></div></div>
+                        <div class="form-group-custom"><label class="field-label">Akana / Mulesoft</label><div class="field-input"><textarea class="form-control"></textarea></div></div>
+                        <div class="form-group-custom"><label class="field-label">Kafka Topic</label><div class="field-input"><textarea class="form-control"></textarea></div></div>
+                        <div class="form-group-custom"><label class="field-label">Azure Client Id's</label><div class="field-input"><textarea class="form-control"></textarea></div></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section-box">
+                <div class="section-header">Resource Contacts</div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group-custom"><label class="field-label">offshore Primary</label><div class="field-input"><input type="text" class="form-control"></div></div>
+                        <div class="form-group-custom"><label class="field-label">offshore Secondary</label><div class="field-input"><input type="text" class="form-control"></div></div>
+                        <div class="form-group-custom"><label class="field-label">offshore Teritary</label><div class="field-input"><input type="text" class="form-control"></div></div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group-custom"><label class="field-label">onshore Primary</label><div class="field-input"><input type="text" class="form-control"></div></div>
+                        <div class="form-group-custom"><label class="field-label">onshore Secondary</label><div class="field-input"><input type="text" class="form-control"></div></div>
+                        <div class="form-group-custom"><label class="field-label">onshore Teritary</label><div class="field-input"><input type="text" class="form-control"></div></div>
                     </div>
                 </div>
             </div>
